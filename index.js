@@ -1,14 +1,23 @@
-import express from "express";
+import qrcode from "qrcode-terminal";
+import pkg from "whatsapp-web.js";
 
-const app = express();
-app.use(express.json());
+const { Client } = pkg;
 
-app.get("/", (req, res) => {
-  res.send("Bot WhatsApp funcionando 🚀");
+const client = new Client();
+
+client.on("qr", (qr) => {
+  console.log("QR RECEBIDO, ESCANEIE:");
+  qrcode.generate(qr, { small: true });
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log("Servidor rodando na porta " + PORT);
+client.on("ready", () => {
+  console.log("Bot conectado!");
 });
+
+client.on("message", (message) => {
+  if (message.body === "oi") {
+    message.reply("Olá! 👋");
+  }
+});
+
+client.initialize();
