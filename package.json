@@ -1,0 +1,13 @@
+{
+  "name": "bot-whatsapp-audio",
+  "version": "1.0.0",
+  "description": "Bot de transcrição de áudio WhatsApp",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
